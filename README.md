@@ -2,9 +2,8 @@
 
 Dependencies to install:
 
-NOTE: If needed create venv
+NOTE: If needed create venv THEN to use on Jupyter Notebook
 
-    : If venv created THEN to use on Jupyter Notebook
 	python -m pip install --upgrade pip
 	pip install ipykernel
 	python -m ipykernel install --user --name=<name_of_venv>
