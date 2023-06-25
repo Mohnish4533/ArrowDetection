@@ -1,0 +1,12 @@
+item { 
+	name:'Left'
+	id:1
+}
+item { 
+	name:'Right'
+	id:2
+}
+item { 
+	name:'Cone'
+	id:3
+}
