@@ -61,7 +61,11 @@ cap = cv2.VideoCapture(0)
 width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
+tick_freq = cv2.getTickFrequency()
+
 while cap.isOpened(): 
+    t1 = cv2.getTickCount()
+
     ret, frame = cap.read()
     image_np = np.array(frame)
     
@@ -91,6 +95,11 @@ while cap.isOpened():
                 agnostic_mode=False)
 
     cv2.imshow('object detection',  cv2.resize(image_np_with_detections, (800, 600)))
+    
+    t2 = cv2.getTickCount()
+    inference_time = (t2 - t1)/tick_freq
+    frame_rate = 1 / inference_time
+    print(frame_rate)
     
     if cv2.waitKey(10) & 0xFF == ord('q'):
         cap.release()
