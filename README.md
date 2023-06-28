@@ -24,7 +24,7 @@ python -m ipykernel install --user --name=OD_1    #use the same name as the venv
 1. Install opencv
 <pre>
 pip install opencv-pyhton
-<pre>
+</pre>
 2. <p> Run the 'Installing_Dependencies.ipynb' file to install the Object Detection API on the 'OD_1' kernal. Some steps regarding how to identify if the Object Detection API is installed are mentioned within the Notebook.<br/>
 <b>Step 6.1: </b> Running Image Detection
 <p>Create a folder named 'test' and add images within it.<br> 
