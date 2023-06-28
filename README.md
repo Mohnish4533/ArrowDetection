@@ -21,18 +21,18 @@ pip install ipykernel
 python -m ipykernel install --user --name=OD_1    #use the same name as the venv created
 </pre>
 <b>Step 5: </b> Install required dependencies.<br/>
-1. Install opencv
+- Install opencv
 <pre>
 pip install opencv-pyhton
 </pre>
-2. <p> Run the 'Installing_Dependencies.ipynb' file to install the Object Detection API on the 'OD_1' kernal. Some steps regarding how to identify if the Object Detection API is installed are mentioned within the Notebook.<br/>
+- <p> Run the 'Installing_Dependencies.ipynb' file to install the Object Detection API on the 'OD_1' kernal. Some steps regarding how to identify if the Object Detection API is installed are mentioned within the Notebook.<br/><br/>
 <b>Step 6.1: </b> Running Image Detection
 <p>Create a folder named 'test' and add images within it.<br> 
 <p>Save this folder in Tensorflow/workspace/images<br>
-<p>Then run ImageDetection.py
+<p>Then run ImageDetection.py<br/><br/>
 <b>Step 6.2: </b> Running Real Time Object Detection
 <p> start running RealTimeDetection.py.<br>
-<p> The video will start running in a few seconds and then you can test it out.<br/>  
+<p> The video will start running in a few seconds and then you can test it out.<br/><br/>  
 
 
 # Arrow Detection Dataset and labels
