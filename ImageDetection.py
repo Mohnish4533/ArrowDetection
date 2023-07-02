@@ -20,18 +20,14 @@ PRETRAINED_MODEL_NAME = 'ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8'
 LABEL_MAP_NAME = 'label_map.pbtxt'
 
 paths = {
-    'WORKSPACE_PATH': os.path.join('Tensorflow', 'workspace'),
-    'ANNOTATION_PATH': os.path.join('Tensorflow', 'workspace','annotations'),
-    'IMAGE_PATH': os.path.join('Tensorflow', 'workspace','images'),
-    'MODEL_PATH': os.path.join('Tensorflow', 'workspace','models'),
-    'CHECKPOINT_PATH': os.path.join('Tensorflow', 'workspace','models',CUSTOM_MODEL_NAME), 
-    'OUTPUT_PATH': os.path.join('Tensorflow', 'workspace','models',CUSTOM_MODEL_NAME, 'export'), 
-    'TFJS_PATH':os.path.join('Tensorflow', 'workspace','models',CUSTOM_MODEL_NAME, 'tfjsexport'), 
-    'TFLITE_PATH':os.path.join('Tensorflow', 'workspace','models',CUSTOM_MODEL_NAME, 'tfliteexport')
+    'ANNOTATION_PATH': os.path.join('annotations'),
+    'IMAGE_PATH': os.path.join('images'),
+    'CHECKPOINT_PATH': os.path.join(CUSTOM_MODEL_NAME), 
+    'PROTOC_PATH':os.path.join('Tensorflow','protoc')
  }
 
 files = {
-    'PIPELINE_CONFIG':os.path.join('Tensorflow', 'workspace','models', CUSTOM_MODEL_NAME, 'pipeline.config'),
+    'PIPELINE_CONFIG':os.path.join(CUSTOM_MODEL_NAME, 'pipeline.config'),
     'LABELMAP': os.path.join(paths['ANNOTATION_PATH'], LABEL_MAP_NAME)
 }
 
@@ -55,7 +51,7 @@ def detect_fn(image):
 
 category_index = label_map_util.create_category_index_from_labelmap(files['LABELMAP'])
 
-IMAGE_PATH = os.path.join(paths['IMAGE_PATH'], 'test', 'R_1100.jpg')
+IMAGE_PATH = os.path.join(paths['IMAGE_PATH'], 'R_1100.jpg')        # change image name for detecting object in specified image
 
 
 img = cv2.imread(IMAGE_PATH)
