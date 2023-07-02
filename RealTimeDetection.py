@@ -17,20 +17,14 @@ PRETRAINED_MODEL_NAME = 'ssd_mobilenet_v2_fpnlite_320x320_coco17_tpu-8'
 LABEL_MAP_NAME = 'label_map.pbtxt'
 
 paths = {
-    'WORKSPACE_PATH': os.path.join('Tensorflow', 'workspace'),
-    'APIMODEL_PATH': os.path.join('Tensorflow','models'),
-    'ANNOTATION_PATH': os.path.join('Tensorflow', 'workspace','annotations'),
-    'IMAGE_PATH': os.path.join('Tensorflow', 'workspace','images'),
-    'MODEL_PATH': os.path.join('Tensorflow', 'workspace','models'),
-    'CHECKPOINT_PATH': os.path.join('Tensorflow', 'workspace','models',CUSTOM_MODEL_NAME), 
-    'OUTPUT_PATH': os.path.join('Tensorflow', 'workspace','models',CUSTOM_MODEL_NAME, 'export'), 
-    'TFJS_PATH':os.path.join('Tensorflow', 'workspace','models',CUSTOM_MODEL_NAME, 'tfjsexport'), 
-    'TFLITE_PATH':os.path.join('Tensorflow', 'workspace','models',CUSTOM_MODEL_NAME, 'tfliteexport'),
+    'ANNOTATION_PATH': os.path.join('annotations'),
+    'IMAGE_PATH': os.path.join('images'),
+    'CHECKPOINT_PATH': os.path.join(CUSTOM_MODEL_NAME), 
     'PROTOC_PATH':os.path.join('Tensorflow','protoc')
  }
 
 files = {
-    'PIPELINE_CONFIG':os.path.join('Tensorflow', 'workspace','models', CUSTOM_MODEL_NAME, 'pipeline.config'),
+    'PIPELINE_CONFIG':os.path.join(CUSTOM_MODEL_NAME, 'pipeline.config'),
     'LABELMAP': os.path.join(paths['ANNOTATION_PATH'], LABEL_MAP_NAME)
 }
 
@@ -42,7 +36,7 @@ detection_model = model_builder.build(model_config=configs['model'], is_training
 
 # Restore checkpoint
 ckpt = tf.compat.v2.train.Checkpoint(model=detection_model)
-ckpt.restore(os.path.join(paths['CHECKPOINT_PATH'], 'ckpt-4')).expect_partial()
+ckpt.restore(os.path.join(paths['CHECKPOINT_PATH'], 'ckpt-3')).expect_partial()
 
 @tf.function
 def detect_fn(image):
@@ -67,6 +61,10 @@ while cap.isOpened():
     t1 = cv2.getTickCount()
 
     ret, frame = cap.read()
+
+    #fps = int(cap.get(cv2.CAP_PROP_FPS))
+    #print("fps: ", fps)
+
     image_np = np.array(frame)
     
     input_tensor = tf.convert_to_tensor(np.expand_dims(image_np, 0), dtype=tf.float32)
@@ -100,7 +98,7 @@ while cap.isOpened():
     inference_time = (t2 - t1)/tick_freq
     frame_rate = 1 / inference_time
     print(frame_rate)
-    
+
     if cv2.waitKey(10) & 0xFF == ord('q'):
         cap.release()
         cv2.destroyAllWindows()
